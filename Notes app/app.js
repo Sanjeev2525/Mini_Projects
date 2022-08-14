@@ -3,42 +3,36 @@ const bodyParser=require("body-parser");
 
 const app = express();
 
+var notes = ["Add your to do list in here"];
+
 app.set('view engine', 'ejs'); // use ejs as it view engine
 
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/",function(req,res) {
 
 	var today =  new Date();
-	var currentDay = today.getDay();
-	var day = "";
-	switch(currentDay){
-		case 0:
-			day="Sunday";
-			break;
-		case 1:
-			day="Monday";
-			break;
-		case 2:
-			day="Tuesday";
-			break;
-		case 3:
-			day="Wednesday";
-			break;
-		case 4:
-			day="Thursday";
-			break;
-		case 5:
-			day="Friday";
-			break;
-		case 6:
-			day="Saturday";
-			break;
-		default:
-		console.log("Error: currentDay is not valid something's wrong")
-	}
-res.render('list', {
-	WhichDay: day}) ;	
+	
+	var options ={
+		weekday: "long",
+		day: "numeric",
+		month: "long"
+	};
+
+	var day= today.toLocaleDateString("en-US",options); 
+
+	res.render('list', { WhichDay: day,
+		                 newNotes:  notes  }) ; // reason why we add here is cant have two render stateemets
+
 });
+app.post("/",function(req,res){
+	var list=req.body.newNote;
+	notes.push(list);
+	res.redirect("/") //redirects
+});
+
+		
+
 
 
   

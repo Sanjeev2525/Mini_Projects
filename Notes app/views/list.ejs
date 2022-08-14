@@ -5,6 +5,20 @@
 <title>To do List</title>
 </head>
 <body>
-<h1> It's  <%= WhichDay %>! </h1>
+<h1><%= WhichDay %> List </h1>
+
+<ul>
+<% for(var i=0; i<newNotes.length; i++) { %>
+	<li><%= newNotes[i] %> </li>
+	<% } %>
+</ul>
+
+<form class="" action="/" method="post">
+<input type="text" name="newNote">
+<button type="submit" name="button">Add</buton>
+
+
+
+
 </body>
 </html> 
