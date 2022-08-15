@@ -1,24 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>To do List</title>
-</head>
-<body>
-<h1><%= WhichDay %> List </h1>
+<%- include("header")-%>
 
-<ul>
-<% for(var i=0; i<newNotes.length; i++) { %>
-	<li><%= newNotes[i] %> </li>
-	<% } %>
-</ul>
-
-<form class="" action="/" method="post">
-<input type="text" name="newNote">
-<button type="submit" name="button">Add</buton>
+ 
+<div class="box" id="heading">
+<h1><%= listTitle %> List </h1>
+	</div>
 
 
+<div class="box">
+	<% for(let i=0; i<newNotes.length; i++) { %>
+	<div class="item">
+		<input type="checkbox" >
+		<p><%= newNotes[i] %></p>
+	</div>
+
+<% } %>
+
+<form class="item" action="/" method="post">
+<input type="text" name="inputednote" placeholder="New Task" autocomplete="off">
+<button type="submit" name="list" value=<%=listTitle%>>+</buton>    <%#  Here in the value it akes only the first word %>
+</form>
+
+</div>	
+
+<%- include("footer")-%>
 
 
-</body>
-</html> 
+
+
+
+
+
+
+ 
