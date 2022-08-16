@@ -1,10 +1,11 @@
 const express = require("express");
 const bodyParser=require("body-parser");
+const date=require(__dirname+"/date.js");
 
 const app = express();
 
-let notes = ["Add your to do list in here"]; //use let instead of var since let is local and var is global
-let workItems=[];
+const notes = ["Add your to do list in here"]; //use let instead of var since let is local and var is global
+const workItems=[]; //You can use const for array if you push elements.
 
 
 app.set('view engine', 'ejs'); // use ejs as it view engine
@@ -13,22 +14,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get("/",function(req,res) {
 
-	let today =  new Date();
-	
-	let options ={
-		weekday: "long",
-		day: "numeric",
-		month: "long"
-	};
-
-	let day= today.toLocaleDateString("en-US",options); 
+	 const day = date.getDay();
 
 	res.render("list", { listTitle: day,
 		                 newNotes:  notes  }) ; // reason why we add here is cant have two render stateemets
 
 });
 app.post("/", function(req,res){
-	let list=req.body.inputednote;
+	const list=req.body.inputednote;
 	console.log(req.body);
 	if(req.body.list==="Work"){
 		workItems.push(list);
